@@ -1126,6 +1126,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+  greeniq_customizations:
+    dependency: "direct main"
+    description:
+      path: "packages/greeniq_customizations"
+      relative: true
+    source: path
+    version: "0.1.0"
   gtk:
     dependency: transitive
     description:

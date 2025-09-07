@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:thingsboard_app/config/routes/tb_routes.dart';
-import 'package:thingsboard_app/dev/preview_page.dart';
+import 'package:thingsboard_app/greeniq/preview_page.dart';
 
 class PreviewRoutes extends TbRoutes {
   PreviewRoutes(super.tbContext);

@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  greeniq_customizations:
+    path: packages/greeniq_customizations
   thingsboard_client: ^4.0.0
   # Match Flutter 3.29 flutter_localizations which pins intl 0.20.2
   intl: ^0.20.2

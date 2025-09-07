@@ -6,6 +6,10 @@ import 'package:thingsboard_app/locator.dart';
 import 'package:thingsboard_app/modules/device/devices_base.dart';
 import 'package:thingsboard_app/modules/device/devices_list.dart';
 import 'package:thingsboard_app/widgets/tb_app_bar.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:fluro/fluro.dart';
+import 'package:greeniq_customizations/greeniq_customizations.dart';
+import 'package:thingsboard_app/modules/device/provisioning/route/esp_provisioning_route.dart';
 import 'package:thingsboard_app/widgets/tb_app_search_bar.dart';
 
 class DevicesListPage extends TbContextWidget {
@@ -116,7 +120,13 @@ class _DevicesListPageState extends TbContextState<DevicesListPage>
         ],
       );
     }
-    return Scaffold(appBar: appBar, body: devicesList);
+    return Scaffold(
+      appBar: appBar,
+      body: devicesList,
+      floatingActionButton: GreeniqAddDeviceFab(
+        navigator: _AppProvisioningNavigator(getIt<ThingsboardAppRouter>()),
+      ),
+    );
   }
 
   @override
@@ -127,4 +137,34 @@ class _DevicesListPageState extends TbContextState<DevicesListPage>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class _AppProvisioningNavigator implements GreeniqProvisioningNavigator {
+  _AppProvisioningNavigator(this.router);
+  final ThingsboardAppRouter router;
+
+  @override
+  Future<String?> scanQrRawValue() async {
+    final Barcode? barcode = await router.navigateTo(
+      '/qrCodeScan?isProvisioning=true',
+      transition: TransitionType.nativeModal,
+    );
+    return barcode?.rawValue;
+  }
+
+  @override
+  Future<bool?> startBle(Map<String, String> args) {
+    return router.navigateTo(
+      EspProvisioningRoute.wifiRoute,
+      routeSettings: RouteSettings(arguments: args),
+    );
+  }
+
+  @override
+  Future<bool?> startSoftAp(Map<String, String> args) {
+    return router.navigateTo(
+      EspProvisioningRoute.softApRoute,
+      routeSettings: RouteSettings(arguments: args),
+    );
+  }
 }

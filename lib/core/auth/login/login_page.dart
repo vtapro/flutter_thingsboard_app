@@ -92,6 +92,17 @@ class _LoginPageState extends TbPageState<LoginPage>
         body: Stack(
           children: [
             const LoginPageBackground(),
+            // Dev-only: quick navigation to preview of screens
+            Positioned(
+              right: 12,
+              top: MediaQuery.paddingOf(context).top + 12,
+              child: OutlinedButton.icon(
+                icon: const Icon(Icons.visibility_outlined, size: 18),
+                label: const Text('Preview'),
+                onPressed:
+                    () => getIt<ThingsboardAppRouter>().navigateTo('/_preview'),
+              ),
+            ),
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
                 switch (state) {
@@ -152,7 +163,9 @@ class _LoginPageState extends TbPageState<LoginPage>
                                               children: [
                                                 Text(
                                                   selectedRegion
-                                                          ?.regionToString(context) ??
+                                                          ?.regionToString(
+                                                            context,
+                                                          ) ??
                                                       '',
                                                   style: TbTextStyles.bodyLarge,
                                                 ),
@@ -199,7 +212,6 @@ class _LoginPageState extends TbPageState<LoginPage>
                                             ),
                                             child: Center(
                                               child: Text(
-                                              
                                                 S.of(context).loginWith,
                                                 style: TbTextStyles.bodyMedium
                                                     .copyWith(
@@ -231,7 +243,7 @@ class _LoginPageState extends TbPageState<LoginPage>
                                                       height: 24,
                                                     ),
                                                     const SizedBox(width: 8),
-                                                     Text(
+                                                    Text(
                                                       S.of(context).scanQrCode,
                                                       style: const TextStyle(
                                                         color: Colors.black,
@@ -509,7 +521,7 @@ class _LoginPageState extends TbPageState<LoginPage>
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Center(
             child: Text(
-             S.of(context).loginWith,
+              S.of(context).loginWith,
               style: TbTextStyles.bodyMedium.copyWith(
                 color: Colors.black.withValues(alpha: .54),
               ),
@@ -535,7 +547,7 @@ class _LoginPageState extends TbPageState<LoginPage>
             Expanded(
               child: OutlinedButton(
                 style: _oauth2IconButtonStyle,
-                onPressed: ()  => _onLoginWithBarcode(context),
+                onPressed: () => _onLoginWithBarcode(context),
                 child: SvgPicture.asset(
                   // translate-me-ignore-next-line
                   ThingsboardImage.oauth2Logos['qr-code']!,

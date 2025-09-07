@@ -18,7 +18,8 @@ import 'package:thingsboard_app/utils/services/local_database/i_local_database_s
 import 'package:universal_platform/universal_platform.dart';
 
 void main() async {
- final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Hive.initFlutter();
   Hive.registerAdapter(RegionAdapter());

@@ -23,6 +23,7 @@ import 'package:thingsboard_app/modules/profile/profile_routes.dart';
 import 'package:thingsboard_app/modules/tenant/tenant_routes.dart';
 import 'package:thingsboard_app/modules/url/url_routes.dart';
 import 'package:thingsboard_app/modules/version/route/version_route.dart';
+import 'package:thingsboard_app/dev/preview_routes.dart';
 import 'package:thingsboard_app/utils/services/local_database/i_local_database_service.dart';
 import 'package:thingsboard_app/utils/services/overlay_service/i_overlay_service.dart';
 import 'package:thingsboard_app/utils/ui_utils_routes.dart';
@@ -149,6 +150,8 @@ class ThingsboardAppRouter {
     MoreRoutes(_tbContext).doRegisterRoutes(router);
     VersionRoutes(_tbContext).doRegisterRoutes(router);
     EspProvisioningRoute(_tbContext).doRegisterRoutes(router);
+    // Development-only screen preview route
+    PreviewRoutes(_tbContext).doRegisterRoutes(router);
   }
 
   TbContext get tbContext => _tbContext;

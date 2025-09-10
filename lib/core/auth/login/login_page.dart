@@ -20,7 +20,6 @@ import 'package:thingsboard_app/core/auth/oauth2/i_oauth2_client.dart';
 import 'package:thingsboard_app/core/context/tb_context_widget.dart';
 import 'package:thingsboard_app/generated/l10n.dart';
 import 'package:thingsboard_app/locator.dart';
-import 'package:greeniq_customizations/greeniq_customizations.dart';
 import 'package:thingsboard_app/thingsboard_client.dart';
 import 'package:thingsboard_app/utils/services/device_info/i_device_info_service.dart';
 import 'package:thingsboard_app/utils/services/endpoint/i_endpoint_service.dart';
@@ -93,14 +92,7 @@ class _LoginPageState extends TbPageState<LoginPage>
         body: Stack(
           children: [
             const LoginPageBackground(),
-            // Dev-only: quick navigation to preview of screens
-            Positioned(
-              right: 12,
-              top: MediaQuery.paddingOf(context).top + 12,
-              child: GreeniqPreviewButton(
-                onTap: () => getIt<ThingsboardAppRouter>().navigateTo('/_preview'),
-              ),
-            ),
+            // Removed dev-only preview button
             BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) {
                 switch (state) {

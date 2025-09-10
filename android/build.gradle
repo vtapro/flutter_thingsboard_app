@@ -42,6 +42,18 @@ subprojects {
                     }
             }
         }
+
+        // Ensure all Kotlin compilation targets JVM 17 to match Java.
+        // This fixes "Inconsistent JVM-target" errors in transitive plugins
+        // like :audio_session when Java uses 17 but Kotlin defaults to 11.
+        if (project.plugins.hasPlugin("org.jetbrains.kotlin.android") ||
+                project.plugins.hasPlugin("kotlin-android")) {
+            project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { task ->
+                task.kotlinOptions {
+                    jvmTarget = "17"
+                }
+            }
+        }
     }
 }
 subprojects {

@@ -32,7 +32,7 @@ Mục này mô tả các thay đổi đã thêm so với mã nguồn gốc để
     ```
   - Xuất các tiện ích:
     - `GreeniqAddDeviceFab` (nút dấu + thêm thiết bị, gọi QR và điều hướng qua delegate)
-    - `GreeniqPreviewButton`, `PreviewPage`
+    - (đã gỡ) các thành phần Preview trong giai đoạn phát triển
 - App chỉ giữ lớp “adapter/delegate” mỏng để gọi router hiện tại, ví dụ `_AppProvisioningNavigator` trong `lib/modules/device/devices_list_page.dart`.
 
 ### Endpoint máy chủ
@@ -41,10 +41,8 @@ Mục này mô tả các thay đổi đã thêm so với mã nguồn gốc để
 - Android App Links host mặc định: `iot.greeniq.vn`.
 - iOS App Links và Registration Redirect host mặc định: `iot.greeniq.vn`.
 
-### Màn “Preview” nhanh (chỉ dùng khi debug)
-- Route `/_preview` liệt kê các màn phổ biến để mở nhanh.
-- Tại màn đăng nhập có nút “Preview” (chỉ dùng khi phát triển) để mở danh sách này.
-- Có thể chạy thẳng vào preview: `flutter run --route=/_preview`.
+### Màn “Preview” nhanh
+Đã gỡ hoàn toàn các nút/route Preview ra khỏi mã nguồn sản phẩm.
 
 ### Thêm thiết bị Mesh qua QR
 - Ở màn “All devices”, nút nổi (Floating Action Button) dấu “+” sẽ mở trình quét QR để thêm thiết bị.
@@ -58,6 +56,60 @@ Mục này mô tả các thay đổi đã thêm so với mã nguồn gốc để
 - Đã nâng: Android Gradle Plugin 8.6.0, Kotlin 2.1.0, Gradle 8.10.2.
 - Yêu cầu JDK 17.
 - Đã giảm cảnh báo từ thư viện bên thứ ba bằng tuỳ chọn Java 17 và tham số `-Xlint` trong `android/build.gradle`.
+
+### Khắc phục lỗi build Android (JVM target mismatch)
+Nếu gặp lỗi khi chạy `flutter run`/build Android:
+
+```
+Execution failed for task ':audio_session:compileDebugKotlin'.
+Inconsistent JVM-target compatibility detected for tasks 'compileDebugJavaWithJavac' (17) and 'compileDebugKotlin' (11).
+```
+
+Nguyên nhân: một số plugin Kotlin mặc định biên dịch với JVM 11, trong khi dự án dùng Java 17.
+
+Đã khắc phục sẵn trong repo: `android/build.gradle` cưỡng bức tất cả module Kotlin dùng `jvmTarget = "17"` để đồng bộ với Java 17.
+
+Trường hợp bạn migrate từ code cũ hoặc thấy lỗi quay lại, áp dụng các bước sau:
+
+1) Đảm bảo JDK 17
+
+- Kiểm tra: `java -version` → phải hiển thị `17`.
+- Nếu khác 17, cài JDK 17 và trỏ `JAVA_HOME` tới JDK 17 (Android Studio Arctic/Flamingo trở lên thường đã đi kèm JDK 17).
+
+2) Đồng bộ Java/Kotlin = 17 trong Gradle
+
+- Trong `android/app/build.gradle`:
+  ```gradle
+  android {
+    compileOptions {
+      sourceCompatibility JavaVersion.VERSION_17
+      targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+      jvmTarget = "17"
+    }
+  }
+  ```
+- Trong `android/build.gradle` (gốc), thêm cấu hình bắt buộc cho mọi subproject (đã có sẵn trong repo):
+  ```gradle
+  if (project.plugins.hasPlugin("org.jetbrains.kotlin.android") ||
+      project.plugins.hasPlugin("kotlin-android")) {
+    project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { task ->
+      task.kotlinOptions { jvmTarget = "17" }
+    }
+  }
+  ```
+- Đảm bảo phiên bản Kotlin plugin khớp: trong `android/settings.gradle` có `org.jetbrains.kotlin.android` version `2.1.0` (hoặc tương thích với AGP đang dùng).
+
+3) Làm sạch và build lại
+
+```bash
+flutter clean
+flutter pub get
+flutter run
+```
+
+Nếu vẫn còn lỗi, xoá thư mục `build/` trong root và trong `android/`, sau đó chạy lại các lệnh trên, hoặc mở issue kèm log lỗi đầy đủ.
 
 ### Lệnh hữu ích
 - Làm sạch và lấy gói: `flutter clean && flutter pub get`
@@ -86,8 +138,7 @@ Giải thích:
 
 ### Điểm móc hiện tại (để so sánh khi merge)
 - `lib/modules/device/devices_list_page.dart`: thêm FloatingActionButton sử dụng `GreeniqAddDeviceFab` + adapter điều hướng.
-- `lib/core/auth/login/login_page.dart`: thêm `GreeniqPreviewButton` (nút Preview).
-- `lib/config/routes/router.dart`: đăng ký route `/_preview` dùng `PreviewPage` từ plugin.
+- (Đã gỡ) các điểm móc cho Preview gồm nút Preview ở `login_page.dart` và route `/_preview`.
 
 ### Nguyên tắc phát triển tiếp theo
 - Thêm tính năng mới → đặt vào `packages/greeniq_customizations`, chỉ chạm code gốc bằng 1–2 điểm móc gọi plugin.

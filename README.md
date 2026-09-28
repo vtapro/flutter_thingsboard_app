@@ -11,6 +11,36 @@ Build your own IoT mobile application **with minimum coding efforts**
 - [Customize your app](https://thingsboard.io/docs/mobile/customization/) - learn how to customize the app
 - [Publish your app](https://thingsboard.io/docs/mobile/release/) - learn how to publish app to Google Play or App Store
 
+## Server endpoint
+
+This build is configured for the **GreenIQ** ThingsBoard server.
+
+The API endpoint is compiled into the app and defaults to `https://app.greeniq.vn`
+(see `lib/constants/app_constants.dart`). Because a default endpoint is set, the
+North America / Europe region picker is skipped and the app always connects to
+`https://app.greeniq.vn` (`Region.custom`).
+
+To point the app at another ThingsBoard server, override the endpoint at build time
+(no code change required):
+
+```bash
+flutter run   --dart-define=thingsboardApiEndpoint=https://your-server.example.com
+flutter build apk --release --dart-define=thingsboardApiEndpoint=https://your-server.example.com
+```
+
+App Links / deep links follow the same host and can be overridden too:
+
+```bash
+--dart-define=appLinksUrlHost=your-server.example.com
+--dart-define=webPathPrefix=/api/noauth/qr
+--dart-define=appLinksUrlScheme=https
+```
+
+- Android: `android/app/build.gradle` (`appLinksUrlHost` default) →
+  `manifestPlaceholders` → `AndroidManifest.xml` intent-filter.
+- iOS: `ios/Flutter/TbDefault.xcconfig` (`APPLINKSURLHOST`) →
+  `Runner.entitlements` (written by a pre-build script in `Runner.xcscheme`).
+
 ## Live demo app
 
 To be familiar with common app features try out our ThingsBoard Live mobile application available on Google Play and App Store

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:thingsboard_app/config/routes/v2/routes_config/routes/login_routes.dart';
 import 'package:thingsboard_app/config/themes/app_colors.dart';
 import 'package:thingsboard_app/config/themes/tb_text_styles.dart';
@@ -17,6 +16,7 @@ import 'package:thingsboard_app/modules/profile/widget/tb_bottom_sheet_builder.d
 import 'package:thingsboard_app/thingsboard_client.dart';
 import 'package:thingsboard_app/utils/services/overlay_service/i_overlay_service.dart';
 import 'package:thingsboard_app/utils/services/tb_client_service/i_tb_client_service.dart';
+import 'package:thingsboard_app/utils/ui/mdi_icons.dart';
 import 'package:thingsboard_app/utils/ui/text_extension.dart';
 import 'package:thingsboard_app/utils/ui/visibility_widget.dart';
 
@@ -389,7 +389,7 @@ class SelectProviderTypeWidget extends HookConsumerWidget {
 
 Widget getIcon(String iconName, BuildContext context, Color color) {
   Widget icon;
-  final iconData = MdiIcons.fromString(iconName);
+  final iconData = mdiIconFromString(iconName);
   if (iconData != null) {
     icon = Icon(iconData, size: 24, color: color);
   } else {

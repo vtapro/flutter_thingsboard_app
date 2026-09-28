@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:thingsboard_app/thingsboard_client.dart';
+import 'package:thingsboard_app/utils/ui/mdi_icons.dart';
 
 class NotificationIcon extends StatelessWidget {
   const NotificationIcon({super.key, required this.notification});
@@ -40,7 +40,7 @@ class NotificationIcon extends StatelessWidget {
       if (imageData.contains('mdi')) {
         return Icon(
           // translate-me-ignore-next-line
-          MdiIcons.fromString(imageData.split('mdi:').last),
+          mdiIconFromString(imageData.split('mdi:').last),
           color: _toColor(data['color']?.toString()),
         );
       }

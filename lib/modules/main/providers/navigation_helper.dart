@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:thingsboard_app/generated/l10n.dart';
 import 'package:thingsboard_app/modules/main/model/navigation_item_data.dart';
 import 'package:thingsboard_app/modules/notification/widgets/notification_icon.dart';
 import 'package:thingsboard_app/thingsboard_client.dart';
+import 'package:thingsboard_app/utils/ui/mdi_icons.dart';
 
 class NavigationHelper {
   static String getLocalizedTitle(
@@ -146,7 +146,7 @@ static  String getPath(PageLayout pageLayout) {
 static  IconData getIconFromString(String? icon) {
   if (icon != null) {
     if (icon.contains('mdi')) {
-      return MdiIcons.fromString(icon.split('mdi:').last) ??
+      return mdiIconFromString(icon.split('mdi:').last) ??
           Icons.error_outline;
     }
 

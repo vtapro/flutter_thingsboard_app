@@ -1,5 +1,5 @@
 {
-  "appTitle": "ThingsBoard",
+  "appTitle": "Cuộc Sống Xanh",
   "home": "الرئيسية",
   "devices": "{count, plural, =1{جهاز} other{أجهزة}}",
   "@devices": {

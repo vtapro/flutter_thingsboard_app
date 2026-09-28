@@ -254,7 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyType": MessageLookupByLibrary.simpleMessage("Any type"),
     "apiKey": MessageLookupByLibrary.simpleMessage("Api key"),
     "apiUsageState": MessageLookupByLibrary.simpleMessage("API Usage State"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("ThingsBoard"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Cuộc Sống Xanh"),
     "applyChanges": MessageLookupByLibrary.simpleMessage("Apply changes"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("Are you sure?"),
     "areYouSureYouWantToDeactivate": m3,

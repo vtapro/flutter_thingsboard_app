@@ -257,7 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyType": MessageLookupByLibrary.simpleMessage("Beliebiger Typ"),
     "apiKey": MessageLookupByLibrary.simpleMessage("API-Schlüssel"),
     "apiUsageState": MessageLookupByLibrary.simpleMessage("API-Nutzungsstatus"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("ThingsBoard"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Cuộc Sống Xanh"),
     "applyChanges": MessageLookupByLibrary.simpleMessage(
       "Änderungen übernehmen",
     ),

@@ -41,6 +41,29 @@ App Links / deep links follow the same host and can be overridden too:
 - iOS: `ios/Flutter/TbDefault.xcconfig` (`APPLINKSURLHOST`) →
   `Runner.entitlements` (written by a pre-build script in `Runner.xcscheme`).
 
+## App name
+
+The app is branded **Cuộc Sống Xanh** (Green Life). The name lives in three
+places and they should be kept in sync:
+
+| Where | File | Key |
+| --- | --- | --- |
+| Android launcher label | `android/app/build.gradle` | `customLabel` (`androidApplicationName` dart-define) → `appLabel` manifest placeholder |
+| iOS home screen name | `ios/Flutter/TbDefault.xcconfig` | `IOSAPPLICATIONNAME` → `CFBundleDisplayName` / `CFBundleName` |
+| In-app title (task switcher) | `lib/l10n/intl_*.arb` | `appTitle` |
+
+`appTitle` is also interpolated into `accountActivatedText`, so changing it
+updates those messages as well. After editing the ARB files regenerate the
+localization classes:
+
+```bash
+dart run intl_utils:generate
+```
+
+Both native names can also be overridden at build time without touching the
+files: `--dart-define=androidApplicationName=...` for Android,
+`--dart-define=iosApplicationName=...` for iOS.
+
 ## Firebase
 
 Push notifications use the **GreenIQ** Firebase project `greeniq-578ca`.

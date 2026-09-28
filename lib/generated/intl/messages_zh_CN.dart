@@ -199,7 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyType": MessageLookupByLibrary.simpleMessage("任何类型"),
     "apiKey": MessageLookupByLibrary.simpleMessage("API 密钥"),
     "apiUsageState": MessageLookupByLibrary.simpleMessage("API使用状态"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("Thingsboard"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Cuộc Sống Xanh"),
     "applyChanges": MessageLookupByLibrary.simpleMessage("应用更改"),
     "areYouSure": MessageLookupByLibrary.simpleMessage("您确定吗?"),
     "areYouSureYouWantToDeactivate": m3,

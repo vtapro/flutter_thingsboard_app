@@ -255,7 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyType": MessageLookupByLibrary.simpleMessage("Elk type"),
     "apiKey": MessageLookupByLibrary.simpleMessage("API-sleutel"),
     "apiUsageState": MessageLookupByLibrary.simpleMessage("API-gebruiksstatus"),
-    "appTitle": MessageLookupByLibrary.simpleMessage("ThingsBoard"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Cuộc Sống Xanh"),
     "applyChanges": MessageLookupByLibrary.simpleMessage(
       "Wijzigingen toepassen",
     ),

@@ -54,9 +54,9 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `ThingsBoard`
+  /// `Cuộc Sống Xanh`
   String get appTitle {
-    return Intl.message('ThingsBoard', name: 'appTitle', desc: '', args: []);
+    return Intl.message('Cuộc Sống Xanh', name: 'appTitle', desc: '', args: []);
   }
 
   /// `Home`

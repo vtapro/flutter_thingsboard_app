@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
-        // START: FlutterFire Configuration
-  //  id 'com.google.gms.google-services'
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
     // END: FlutterFire Configuration
     id 'kotlin-android'
     id 'dev.flutter.flutter-gradle-plugin'
@@ -49,7 +49,7 @@ namespace "org.thingsboard.app"
     }
 
     defaultConfig {
-        applicationId getDartDefineValue('androidApplicationId')?: "org.thingsboard.app"
+        applicationId getDartDefineValue('androidApplicationId')?: "vn.greeniq.system"
         minSdkVersion 24
         targetSdkVersion 36
         versionCode flutterVersionCode.toInteger()
